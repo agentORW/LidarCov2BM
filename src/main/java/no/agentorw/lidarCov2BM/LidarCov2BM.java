@@ -7,10 +7,13 @@ import de.bluecolored.bluemap.api.markers.MarkerSet;
 import de.bluecolored.bluemap.api.markers.POIMarker;
 import de.bluecolored.bluemap.api.markers.ShapeMarker;
 import de.bluecolored.bluemap.api.math.Shape;
+import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -56,6 +59,14 @@ public final class LidarCov2BM extends JavaPlugin {
 
         markerSet.getMarkers()
                 .put("my-shape-id", shapeMarker);
+
+        File f = getServer().getWorldContainer();
+
+        readDirectories readDirectories = new readDirectories(f);
+        List<fullDatasetObj> stuff = readDirectories.getFullDataset();
+        for (fullDatasetObj obj : stuff) {
+            log.info(obj.dataset.urls.getFirst());
+        }
 
         api.getWorld("world").ifPresent(world -> {
             for (BlueMapMap map : world.getMaps()) {
