@@ -62,8 +62,8 @@ public final class LidarCov2BM extends JavaPlugin {
 
         File f = getServer().getWorldContainer();
 
-        readDirectories readDirectories = new readDirectories(f);
-        List<fullDatasetObj> stuff = readDirectories.getFullDataset();
+        //readDirectories readDirectories = new readDirectories(f);
+        List<fullDatasetObj> stuff = readDirectories.fullDataset;
         for (fullDatasetObj obj : stuff) {
             log.info(obj.dataset.urls.getFirst());
         }

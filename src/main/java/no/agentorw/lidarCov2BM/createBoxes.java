@@ -15,58 +15,31 @@ import java.util.stream.Stream;
 
 public class createBoxes {
 
-    public createBoxes(File f) {
+    public static List<List<String>> getBoxes(String f) {
 
-        URI uri = URI.create(obj.dataset.urls.get(0));
+        URI uri = URI.create(f);
         Path zoomPath = Path.of(uri).getParent().getParent();
 
         try (Stream<Path> xDirs = Files.list(zoomPath)) {
             xDirs
-                    .filter(Files::isDirectory)
-                    .forEach(xDir -> {
-                        try (Stream<Path> zFiles = Files.list(xDir)) {
-                            zFiles
-                                    .filter(p -> p.toString().endsWith(".png"))
-                                    .forEach(z -> {
-                                        // HERE: you have x/z tile
-                                        // xDir.getFileName(), z.getFileName()
-                                    });
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+            .filter(Files::isDirectory)
+            .forEach(xDir -> {
+                try (Stream<Path> zFiles = Files.list(xDir)) {
+                    zFiles
+                    .filter(p -> p.toString().endsWith(".png"))
+                    .forEach(z -> {
+                        // HERE: you have x/z tile
+                        // xDir.getFileName(), z.getFileName()
                     });
-        }
-
-    }
-
-    public int getBoxes() {
-        return 0;
-    }
-
-    public Set<String> listFilesUsingFilesList(String dir) throws IOException {
-        try (Stream<Path> stream = Files.list(Paths.get(dir))) {
-            return stream
-                    .map(Path::getFileName)
-                    .map(Path::toString)
-                    .collect(Collectors.toSet());
-        }
-    }
-
-    public Set<String> getFiles(File f, String link) {
-
-        File xValsPath = new File(
-                f,
-                link
-        );
-
-        String xFullPath = xValsPath.getAbsolutePath();
-
-        Set<String> vals;
-        try {
-            vals = listFilesUsingFilesList(xFullPath);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return vals;
+
+        return null;
     }
+
 }

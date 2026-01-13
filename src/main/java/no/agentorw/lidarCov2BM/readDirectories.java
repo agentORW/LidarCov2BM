@@ -4,19 +4,13 @@ import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class readDirectories {
 
-    private final File f;
-    Logger log;
-
-    List<fullDatasetObj> fullDataset;
+    public static List<fullDatasetObj> fullDataset;
 
     public readDirectories(File f) {
-        this.f = f;
 
         {
             try {
@@ -30,10 +24,6 @@ public class readDirectories {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    public List<fullDatasetObj> getFullDataset() {
-        return fullDataset;
     }
 
 }

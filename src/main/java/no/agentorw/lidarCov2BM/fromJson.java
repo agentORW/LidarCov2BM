@@ -1,8 +1,8 @@
 package no.agentorw.lidarCov2BM;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.type.TypeFactory;
 import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
 
 import java.io.File;
