@@ -11,10 +11,8 @@ import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Logger;
 
 public final class LidarCov2BM extends JavaPlugin {
@@ -22,7 +20,7 @@ public final class LidarCov2BM extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logig
+        // Plugin startup logic
         log.info("LidarCov2BM enabled");
         BlueMapAPI.onEnable(this::onBlueMapEnable);
     }
@@ -62,8 +60,8 @@ public final class LidarCov2BM extends JavaPlugin {
 
         File f = getServer().getWorldContainer();
 
-        //readDirectories readDirectories = new readDirectories(f);
-        List<fullDatasetObj> stuff = readDirectories.fullDataset;
+        //  readDirectories readDirectories = new readDirectories(f);
+        List<fullDatasetObj> stuff = new readDirectories(f).fullDataset;
         for (fullDatasetObj obj : stuff) {
             log.info(obj.dataset.urls.getFirst());
         }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class readDirectories {
 
-    public static List<fullDatasetObj> fullDataset;
+    public List<fullDatasetObj> fullDataset;
 
     public readDirectories(File f) {
 

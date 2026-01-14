@@ -2,24 +2,23 @@ package no.agentorw.lidarCov2BM;
 
 public class tileToCoordinates {
     
-    public void getLatLon(int x, int y, int z) {
+    public static double[] getLatLon(int x, int y, int z) {
 
-        double west, east, north, south;
+        double x1, x2, y1, y2;
 
-        west  = lon(x, z);
-        east  = lon(x + 1, z);
-        north = lat(y, z);
-        south = lat(y + 1, z);
-        
+        x1  = lon(x, z);
+        x2  = lon(x + 1, z);
+        y1 = lat(y, z);
+        y2 = lat(y + 1, z);
 
-        return west, east, north, south;
+        return new double[]{x1, y1, x2, y2};
     }
 
-    private double lon(int x, int z) {
+    private static double lon(int x, int z) {
         return (double) x / Math.pow(2, z) * 360.0 - 180.0;
     }
 
-    private double lat(int y, int z) {
+    private static double lat(int y, int z) {
         double n = Math.PI - (2.0 * Math.PI * y) / Math.pow(2, z);
         return Math.toDegrees(Math.atan(Math.sinh(n)));
     }

@@ -92,5 +92,26 @@
             <version>3.0.3</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.locationtech.jts/jts-core -->
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.20.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.buildtheearth.terraminusminus</groupId>
+            <artifactId>terraminusminus-core</artifactId>
+            <version>2.1.1-1.21.8-SNAPSHOT</version>
+        </dependency>
+
+        <dependency> <!-- https://github.com/PorkStudios/PorkLib - needs to be the same as in TerraMinusMinus-->
+            <groupId>net.daporkchop.lib</groupId>
+            <artifactId>common</artifactId>
+            <version>0.5.7-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
