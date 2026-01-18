@@ -7,11 +7,16 @@ import de.bluecolored.bluemap.api.markers.MarkerSet;
 import de.bluecolored.bluemap.api.markers.POIMarker;
 import de.bluecolored.bluemap.api.markers.ShapeMarker;
 import de.bluecolored.bluemap.api.math.Shape;
-import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
+import no.agentorw.lidarCov2BM.pojos.FullDatasetObj;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 
-import java.awt.*;
 import java.io.File;
+import java.net.URI;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -53,17 +58,39 @@ public final class LidarCov2BM extends JavaPlugin {
                 .build();
 
         markerSet.getMarkers()
-                .put("my-marker-id", marker);
+                .put("my-shape-id", shapeMarker);
 
         markerSet.getMarkers()
-                .put("my-shape-id", shapeMarker);
+                .put("my-marker-id", marker);
 
         File f = getServer().getWorldContainer();
 
         //  readDirectories readDirectories = new readDirectories(f);
-        List<fullDatasetObj> stuff = new readDirectories(f).fullDataset;
-        for (fullDatasetObj obj : stuff) {
+        List<FullDatasetObj> stuff = new ReadDirectories(f).fullDataset;
+
+        for (FullDatasetObj obj : stuff) {
             log.info(obj.dataset.urls.getFirst());
+            Geometry box = CreateBox.getBox(obj.dataset.urls.getFirst());
+
+            URI link = URI.create(obj.dataset.urls.getFirst());
+            Path placePath = Path.of(link).getParent().getParent().getParent();
+            String name = placePath.getFileName().toString();
+
+            //ShapeMarker box = new ShapeMarker()
+
+            Collection<Vector2d> coordsCollection = new ArrayList<>();
+
+            for (Coordinate coord : box.getCoordinates()) {
+                coordsCollection.add(new Vector2d(coord.getX(), coord.getY()));
+            }
+
+            Shape boxShape = new Shape(coordsCollection);
+
+            ShapeMarker bmOutline = new ShapeMarker(name, boxShape, 50);
+
+            markerSet.getMarkers()
+                    .put(name, bmOutline);
+
         }
 
         api.getWorld("world").ifPresent(world -> {

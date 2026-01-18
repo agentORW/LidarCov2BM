@@ -1,16 +1,16 @@
 package no.agentorw.lidarCov2BM;
 
-import no.agentorw.lidarCov2BM.pojos.fullDatasetObj;
+import no.agentorw.lidarCov2BM.pojos.FullDatasetObj;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class readDirectories {
+public class ReadDirectories {
 
-    public List<fullDatasetObj> fullDataset;
+    public List<FullDatasetObj> fullDataset;
 
-    public readDirectories(File f) {
+    public ReadDirectories(File f) {
 
         {
             try {
@@ -19,7 +19,7 @@ public class readDirectories {
                         "terraplusplus/config/heights/heights.json"
                 );
 
-                fullDataset = fromJson.getObjFromFile(jsonFile.getAbsolutePath());
+                fullDataset = FromJson.getObjFromFile(jsonFile.getAbsolutePath());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
